@@ -1,5 +1,5 @@
 {
-  "name": "congo",
+  "name": "Congo",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,9 @@
     "express": "~4.15.2",
     "jade": "~1.11.0",
     "morgan": "~1.8.1",
-    "serve-favicon": "~2.4.2"
+    "mongoskin" : "latest",
+    "serve-favicon": "~2.4.2",
+    "underscore" : "latest",
+    "method-override" : "latest"
   }
 }
