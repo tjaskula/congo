@@ -4,13 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var errorHandler = require('errorhandler');
 
-var routes = require('./routes');
+var index = require('./routes/index');
+var users = require('./routes/users');
 
 var app = express();
-var router = express.Router();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,18 +22,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes.index);
-
-/*app.use(
-  app.use(bodyParser()),
-  app.use(methodOverride()),
-  app.use(app.router),
-  app.use(express.static(__dirname + '/public'))
-);*/
-
-app.use('development', errorHandler({ dumpExceptions: true, showStack: true }));
-
-app.use('production', errorHandler);
+app.use('/', index);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,11 +32,15 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// Routes
-var congo = require("./lib/congo")(app);
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-// var listener = app.listen(3000, function(){
-//     console.log('Listening on port ' + listener.address().port); //Listening on port 3000
-// });
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 module.exports = app;
