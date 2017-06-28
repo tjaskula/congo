@@ -1,13 +1,16 @@
 Congo.DatabaseView = Backbone.View.extend({
   tagName : "tr",
   events : {
-    "click a" : "sayHello"
+    "click a" : "sayHello",
+    "click button" : "sayHello"
   },
   sayHello : function() {
     alert("Hello again!");
   },
   render : function(){
-    $(this.el).html("<td><a href='#'>DB Name</a></td>");
+    var template = $("#database-list-template").html();
+    var compiled = _.template(template, {name : "Templated Name"});
+    $(this.el).html(compiled);
     return this;
   }
 });
