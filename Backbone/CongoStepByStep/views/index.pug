@@ -5,12 +5,9 @@ block content
     ul#breadcrumbs.breadcrumb.span12
 
   script(src="/javascripts/congo/index.js")
+  script(src="/javascripts/congo/nav.js")
 
   script.
-    Congo.BreadcrumbView = Backbone.View.extend({
-      render : function() {
-        $(this.el).html("<li><h3><a href=&quot;#&quot;>DATABASES</a></h3></li>");
-      }
-    });
-    var crumbView = new Congo.BreadcrumbView({el: "#breadcrumbs"});
-    crumbView.render();
+    $(function(){
+      Congo.init();
+    })
