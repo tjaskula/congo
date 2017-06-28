@@ -1,6 +1,12 @@
 /*
  * GET home page.
  */
-exports.index = function(req, res, next){
+
+var express = require('express');
+var router = express.Router();
+
+router.get('/', function(req, res){
   res.render('index', { title: 'Congo: The Mongo Editor' });
-};
+});
+
+module.exports = router;

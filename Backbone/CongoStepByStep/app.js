@@ -24,8 +24,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes.index);
-
 /*app.use(
   app.use(bodyParser()),
   app.use(methodOverride()),
@@ -46,7 +44,7 @@ app.use(function(req, res, next) {
 
 // Routes
 var congo = require("./lib/congo")(app);
-
+app.get('/', router);
 // var listener = app.listen(3000, function(){
 //     console.log('Listening on port ' + listener.address().port); //Listening on port 3000
 // });
