@@ -1,0 +1,97 @@
+extends layout.pug
+
+block content
+  #app
+    .row
+      .span12
+        ul#nav.breadcrumb
+
+    #details
+    #editor
+
+
+  script#editor-template(type = "text/backbone")
+    .row
+      #ace-editor.span9
+      #ace-editor-options.span3.pull-right
+        p
+          button#save-document.btn.btn-primary(style="margin-right:8px") Save 
+          button#delete-document.btn.btn-danger Delete
+
+  script#collection-details-template(type="text/backbone")
+    .row
+      #collection-list.span8
+      #collection-options.span3
+
+  script#db-details-template(type="text/backbone")
+    .row
+      #database-list.span8
+      #database-options.span3
+
+  script#document-details-template(type="text/backbone")
+    .row
+      .span12
+        .row
+          #document-list.span8
+          #document-options.span3
+
+
+  script#new-db-template(type="text/backbone")
+    form#addDb
+      input(id='newDb', type="text")
+      button.btn(type="submit")
+        i.icon.icon-plus-sign
+        | Add 
+
+  script#new-collection-template(type="text/backbone")
+    form#addCollection
+      input(id='newCollection', type="text")
+      button.btn(type="submit")
+        i.icon.icon-plus-sign
+        | Add
+
+  script#collection-list-template(type="text/backbone")
+      td(width=60)
+        img(src="/img/collections.png", style="height:24px")
+      td
+        h4
+          a(href="#", data-collection!='<%=name%>') <%=name%>
+      td
+        button.btn
+          i.icon.icon-remove
+          | delete
+
+  script#database-list-template(type="text/backbone")
+      td(width=60)
+        img(src="/img/database.png", style="height:24px")
+      td
+        h4
+          a(href="#", data-db!='<%=name%>') <%=name%>
+      td
+        button.btn
+          i.icon.icon-remove
+          | delete
+
+  script(id='new-document-template', type="text/template")
+    button.btn(id='addDocument')
+      i.icon.icon-plus-sign
+      | Add
+
+  script(id="document-item-template", type="text/template")
+    a(href="#")
+      p <%=descriptor%>
+
+  script(src="/javascripts/congo/index.js")
+  script(src="/javascripts/congo/base.js")
+  script(src="/javascripts/congo/nav.js")
+  script(src="/javascripts/congo/database.js")
+  script(src="/javascripts/congo/collections.js")
+  script(src="/javascripts/congo/documents.js")
+  script(src="/javascripts/ace/ace.js") 
+  script(src="/javascripts/ace/mode-json.js")
+
+
+  script.
+    $(function(){
+      Congo.start();
+    })
