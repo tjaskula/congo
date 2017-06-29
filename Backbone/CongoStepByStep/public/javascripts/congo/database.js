@@ -2,7 +2,7 @@ Congo.Database = Backbone.Model.extend({
 
 });
 
-Congo.Databases = Backbone.Collection.extend({
+Congo.DatabaseCollection = Backbone.Collection.extend({
   model : Congo.Database,
   url : "mongo-api/dbs"
 });
