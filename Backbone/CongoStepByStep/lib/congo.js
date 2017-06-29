@@ -7,7 +7,7 @@ var Congo = function(app){
 
   //assume localhost
   var connect = function(dbName,next){
-    var db = mongo.db("localhost/" + dbName, {safe : true});
+    var db = mongo.db("mongodb://localhost:27017/" + dbName, {safe : true});
     next(db);
   }
   //stubbed query method for later use
@@ -32,7 +32,7 @@ var Congo = function(app){
   app.get("/mongo-api/dbs",function(req,res){
     var out = [];
     connect("admin",function(db){
-      db.admin.listDatabases(function(err,result){
+      db.admin().listDatabases(function(err,result){
         _.each(result.databases,function(item){
           var formatted = {
             name : item.name,

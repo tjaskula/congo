@@ -20,20 +20,20 @@ app.set('view engine', 'pug');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(methodOverride());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-/*app.use(
-  app.use(bodyParser()),
-  app.use(methodOverride()),
-  app.use(app.router),
-  app.use(express.static(__dirname + '/public'))
-);*/
 
 app.use('development', errorHandler({ dumpExceptions: true, showStack: true }));
 
 app.use('production', errorHandler);
+
+// Routes
+var congo = require("./lib/congo")(app);
+app.use('/', routes.index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,10 +41,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
-// Routes
-var congo = require("./lib/congo")(app);
-app.get('/', router);
 // var listener = app.listen(3000, function(){
 //     console.log('Listening on port ' + listener.address().port); //Listening on port 3000
 // });
