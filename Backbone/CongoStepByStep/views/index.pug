@@ -1,12 +1,17 @@
 extends layout.pug
 
 block content
-  .row
-    ul#breadcrumbs.breadcrumb.span12
+  #app.row
+    .span12
+      ul#nav.breadcrumb
 
-  .row
-    #database-list.span9
-    #db-options.span3
+    #details
+    
+  script#db-details-template(type="text/backbone")
+    .row
+      .span12
+        #database-list.span9
+        #database-options.span3
       
   script#new-db-template(type="text/backbone")
     form#addDb
@@ -14,7 +19,7 @@ block content
         button.btn(type="submit")
           i.icon.icon-plus-sign
           | Add Db
-          
+
   script#database-list-template(type="text/backbone")
     td(width=60)
       img(src="img/collections.png", style="height:24px")
@@ -27,6 +32,7 @@ block content
         | delete
 
   script(src="/javascripts/congo/index.js")
+  script(src="/javascripts/congo/base.js")
   script(src="/javascripts/congo/nav.js")
   script(src="/javascripts/congo/database.js")
 
