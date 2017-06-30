@@ -47,7 +47,7 @@ Congo.DatabaseView = Backbone.View.extend({
   render : function(){
     var template = $("#database-list-template").html();
     var compiled = _.template(template, this.model.toJSON());
-    $(this.el).html(compiled);
+    this.$el.html(compiled);
     return this;
   }
 });
@@ -71,7 +71,7 @@ Congo.DatabaseListView = Backbone.View.extend({
       els.push(itemView.render().el)
     });
       
-    $(this.el).html(els);
-    $("#database-list").html(this.el);
+    this.$el.html(els);
+    $("#database-list").append(this.el);
   }
 });
