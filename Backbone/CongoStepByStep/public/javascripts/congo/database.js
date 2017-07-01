@@ -52,3 +52,18 @@ Congo.DatabaseListView = Congo.ListView.extend({
   className : "table table-striped",
   ItemView : Congo.DatabaseView
 });
+
+Congo.DatabaseLayoutView = Congo.Layout.extend({
+  template : "#db-details-template",
+  regions : {
+    databaseList : "#database-list",
+    databaseOptions : "#database-options"
+  },
+  layoutReady : function () {
+    var dbListView = new Congo.DatabaseListView({ collection : this.collection });
+    var dbOptionView = new Congo.DatabaseOptionView({});
+
+    this.databaseList.append(dbListView.render().el);
+    this.databaseOptions.append(dbOptionView.render().el);
+  }
+});
