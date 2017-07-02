@@ -7,7 +7,7 @@ var Congo = function(app){
 
   //assume localhost
   var connect = function(dbName,next){
-    var db = mongo.db("mongodb://localhost:27017/" + dbName, {safe : true});
+    var db = mongo.db("mongodb://localhost:27017/" + dbName, { safe : true });
     next(db);
   }
   //stubbed query method for later use
@@ -36,7 +36,7 @@ var Congo = function(app){
         _.each(result.databases,function(item){
           var formatted = {
             name : item.name,
-            _url : "http://" + req.headers.host + "/mongo/" + item.name
+            _url : "http://" + req.headers.host + "/mongo-api/" + item.name
           };
           out.push(formatted);
         });
@@ -67,12 +67,12 @@ var Congo = function(app){
     var dbName = req.params.db;
     connect(dbName, function(db){
       var out = [];
-      db.collectionNames(function(err,collNames){
-        _.each(collNames, function(collName){
-          var cleanName = collName.name.replace(dbName + ".","");
+      db.collections(function(err,result) {
+        _.each(result, function(item){
+          var cleanName = item.collectionName;
           var formatted = {
             name : cleanName,
-            _url : "http://" + req.headers.host + "/mongo/" + dbName + "/" + cleanName,
+            _url : "http://" + req.headers.host + "/mongo-api/" + dbName + "/" + cleanName,
             database : dbName
           };
           if(cleanName != "system.indexes")
