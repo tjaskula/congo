@@ -92,7 +92,8 @@ Congo.DocumentView = Congo.ItemView.extend({
   },
   show: function (ev) {
     ev.preventDefault();
-    Congo.navDocument(this.model.id);
+    var route = Congo.currentDatabase + "/" + Congo.selectedCollection + "/" + this.model.id;
+    Congo.router.navigate(route, true);
   },
   //override the render function as we're doing something
   //different with the model
