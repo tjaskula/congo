@@ -1,9 +1,10 @@
 extends layout.pug
 
 block content
-  #app.row
-    .span12
-      ul#nav.breadcrumb
+  #app
+    .row
+      .span12
+        ul#nav.breadcrumb
 
     #details
 
@@ -14,9 +15,8 @@ block content
     
   script#db-details-template(type="text/backbone")
     .row
-      .span12
-        #database-list.span8
-        #database-options.span3
+      #database-list.span8
+      #database-options.span3
       
   script#new-db-template(type="text/backbone")
     form#addDb
