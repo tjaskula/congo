@@ -75,15 +75,10 @@ Congo.AppLayout = Backbone.View.extend({
   },
   renderEditor: function (thing) {
     this.hideEverything();
-    var docJSON = JSON.stringify(thing, null, ' ');
+    Congo.editorView.setModel(thing);
 
     //render out the ace editor
     this.$(this.options.editorRegion).show();
-    var editor = ace.edit("ace-editor");
-    var JsonMode = require("ace/mode/json").Mode;
-    editor.getSession().setMode(new JsonMode());
-    editor.setValue(docJSON);
-    editor.selection.clearSelection();
   },
   renderDetails : function (detailView) {
     // pass the region in on init...

@@ -8,14 +8,14 @@ block content
 
     #details
     #editor
-      .row
-        #editor-options
-          .span1.pull-right
-            button.btn.btn-danger Delete
-          .span1.pull-right
-            button.btn.btn-success Save
-      .row
-        #ace-editor.span12
+
+  script#editor-template(type = "text/backbone")
+    .row
+      #ace-editor.span9
+      #ace-editor-options.span3.pull-right
+        p
+          button#save-document.btn.btn-primary(style="margin-right:8px") Save 
+          button#delete-document.btn.btn-danger Delete
 
   script#collection-details-template(type="text/backbone")
     .row
