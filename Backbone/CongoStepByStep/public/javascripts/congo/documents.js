@@ -36,6 +36,33 @@ Congo.EditorView = Congo.View.extend({
   initialize : function () {
     this.render();
   },
+  events: {
+    "click #save-document": "saveDocument",
+    "click #delete-document" : "deleteDocument"
+  },
+  saveDocument: function () {
+    var json = Congo.editor.getValue();
+    try {
+      var parsed = JSON.parse(json);
+      var newDocument = new Congo.MongoDocument(parsed);
+      newDocument.save(newDocument.attributes, {
+        success: function (model) {
+          Congo.navCollection();
+        },
+        error: function (model, result) {
+          alert("There was a problem on save. Check the server");
+        }
+      });
+    } catch (err) {
+      alert("We have a JSON problem");
+    }
+  },
+  deleteDocument: function () {
+    if (confirm("Delete this document? You sure?")) {
+      this.model.destroy();
+      Congo.navCollection();
+    }
+  },
   setModel : function (model) {
     var docJSON = JSON.stringify(model.toJSON(), null, ' ');
     Congo.editor.setValue(docJSON);
@@ -51,58 +78,6 @@ Congo.EditorView = Congo.View.extend({
     Congo.editor.getSession().setMode(new JsonMode());
   }
 });
-
-// Congo.EditorView = Congo.View.extend({
-//   template: "#editor-template",
-//   initialize: function () {
-//     this.render();
-//   },
-//   events: {
-//     "click #save-document": "saveDocument",
-//     "click #delete-document" : "deleteDocument"
-//   },
-//   saveDocument: function () {
-
-//     var json = Congo.editor.getValue();
-//     try {
-//       var parsed = JSON.parse(json);
-//       var newDocument = new Congo.MongoDocument(parsed);
-//       newDocument.save(newDocument.attributes, {
-//         success: function (model) {
-//           Congo.navCollection();
-//         },
-//         error: function (model, result) {
-//           alert("There was a problem on save. Check the server");
-//         }
-//       });
-//     } catch (err) {
-//       alert("We have a JSON problem");
-//     }
-//   },
-//   deleteDocument: function () {
-//     if (confirm("Delete this document? You sure?")) {
-//       this.model.destroy();
-//       Congo.navCollection();
-//     }
-//   },
-//   setModel: function (model) {
-//     this.model = model || new Congo.MongoDocument();
-//     var docJSON = JSON.stringify(this.model.toJSON(), null, '  ');
-//     Congo.editor.setValue(docJSON);
-//     Congo.editor.selection.clearSelection();
-//   },
-//   render: function () {
-//     var source = $(this.template).html();
-//     var compiled = _.template(source);
-//     this.$el.append(compiled);
-
-//     Congo.editor = ace.edit("ace-editor");
-//     var JsonMode = require("ace/mode/json").Mode;
-//     Congo.editor.getSession().setMode(new JsonMode());
-//     return this;
-//   }
-
-// });
 
 Congo.DocumentView = Congo.ItemView.extend({
   tagName : "tr",

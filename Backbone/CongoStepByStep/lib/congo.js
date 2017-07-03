@@ -153,10 +153,12 @@ var Congo = function(app){
     connect(dbName, function(db){
       var doc = req.body;
       delete doc._id;
-      db.collection(req.params.collection).updateById(req.params.id, doc, {}, function(err,result){
+      console.log(JSON.stringify(doc));
+      db.collection(req.params.collection).updateById(req.params.id, doc, function(err,result){
         var out ={error : err, result : result}; 
         res.json(out);
       });
+      //res.json(doc);
     });
   });
 
