@@ -64,7 +64,8 @@ Congo.EditorView = Congo.View.extend({
     }
   },
   setModel : function (model) {
-    var docJSON = JSON.stringify(model.toJSON(), null, ' ');
+    this.model = model || new Congo.MongoDocument({});
+    var docJSON = JSON.stringify(this.model.toJSON(), null, '  ');
     Congo.editor.setValue(docJSON);
     Congo.editor.selection.clearSelection();
   },
@@ -80,8 +81,8 @@ Congo.EditorView = Congo.View.extend({
 });
 
 Congo.DocumentView = Congo.ItemView.extend({
-  tagName : "tr",
-  template: "#document-list-template",
+  template: "#document-item-template",
+  className : "document pull-left",
   events: {
     "click button": "remove",
     "click a": "show"
@@ -103,8 +104,6 @@ Congo.DocumentView = Congo.ItemView.extend({
 });
 
 Congo.DocumentListView = Congo.ListView.extend({
-  tagName : "ul",
-  className : "thumbnails",
   ItemView : Congo.DocumentView
 });
 
@@ -118,7 +117,7 @@ Congo.DocumentOptionView = Congo.View.extend({
   },
   addDocument: function (event) {
     event.preventDefault();
-    //Congo.navDocument("new");
+    Congo.navDocument("new");
   }
 });
 

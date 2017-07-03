@@ -4,6 +4,7 @@ Congo.BreadcrumbView = Backbone.View.extend({
     Congo.router.on("route:showDatabase", this.renderDatabase, this);
     Congo.router.on("route:showCollection", this.renderCollection, this);
     Congo.router.on("route:showEditor", this.renderEditor, this);
+    Congo.router.on("route:newDocument", this.renderNewDocument, this);
   },
   //The only reason I chose to put this here is because
   //the amount of templates drives me crazy
@@ -58,6 +59,13 @@ Congo.BreadcrumbView = Backbone.View.extend({
     this.showDbLink(db);
     this.showCollectionLink(collection);
     this.$el.append(this.crumb(id));
+  },
+  renderNewDocument: function (db, collection, id) {
+    this.$el.empty();
+    this.showHomeLink();
+    this.showDbLink(db);
+    this.showCollectionLink(collection);
+    this.$el.append(this.crumb("NEW"));
   },
   events : {
     "click #summary" : "navIndex",
