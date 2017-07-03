@@ -56,8 +56,13 @@ Congo.Router = Backbone.Router.extend({
     if (id) Congo.selectedDocumentId = id;
   },
   showEditor : function (db, collection, id) {
-    this.setState(db, collection, id),
-    Congo.appLayout.renderEditor({ message : "Hello!" });
+    this.setState(db, collection, id);
+    var document = new Congo.MongoDocument({ _id : id })
+    document.fetch({
+      success : function (model) {
+        Congo.appLayout.renderEditor(model);
+      }
+    });
   },
   showDatabase : function(db) {
     this.setState(db);

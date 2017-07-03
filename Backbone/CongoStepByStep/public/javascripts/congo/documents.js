@@ -37,7 +37,7 @@ Congo.EditorView = Congo.View.extend({
     this.render();
   },
   setModel : function (model) {
-    var docJSON = JSON.stringify(model, null, ' ');
+    var docJSON = JSON.stringify(model.toJSON(), null, ' ');
     Congo.editor.setValue(docJSON);
     Congo.editor.selection.clearSelection();
   },
