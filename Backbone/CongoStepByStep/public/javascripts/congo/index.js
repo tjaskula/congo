@@ -28,6 +28,17 @@ Congo = {
 
     // for routing purposes
     Backbone.history.start();
+  },
+  navHome: function () {
+    Congo.router.navigate("", true);
+  },
+  navDatabase: function (db) {
+    db = db || Congo.currentDatabase;
+    Congo.router.navigate(db, true);
+  },
+  navCollection: function (collection) {
+    collection = collection || Congo.selectedCollection;
+    Congo.router.navigate(Congo.currentDatabase + "/" + collection, true);
   }
 }
 
