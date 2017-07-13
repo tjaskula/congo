@@ -61,6 +61,16 @@ asap@~2.0.3:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.5.tgz#522765b50c3510490e52d7dcfe085ef9ba96958f"
 
+backbone.marionette@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/backbone.marionette/-/backbone.marionette-3.3.1.tgz#e6b44812a513cd35410b37a73d46423f6b8c57c8"
+  dependencies:
+    backbone.radio "^2.0.0"
+
+backbone.radio@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/backbone.radio/-/backbone.radio-2.0.0.tgz#bbe8672b373e313f99f36d2fbcf583fe77d04f42"
+
 basic-auth@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
