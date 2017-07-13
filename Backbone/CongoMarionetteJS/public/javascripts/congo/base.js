@@ -70,6 +70,9 @@ Congo.Layout = Backbone.View.extend({
 });
 
 Congo.AppLayout = Backbone.View.extend({
+  initialize: function(options) {
+    this.options = options;
+  },
   hideEverything: function () {
     this.$(this.options.detailRegion).empty();
     this.$(this.options.editorRegion).hide();

@@ -27,7 +27,7 @@ Congo.DatabaseOptionView = Congo.View.extend({
   }
 });
 
-Congo.DatabaseView = Congo.ItemView.extend({
+Congo.DatabaseView = Marionette.View.extend({
   tagName : "tr",
   template : "#database-list-template",
   events : {
