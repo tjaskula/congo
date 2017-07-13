@@ -7,7 +7,7 @@ var Congo = function(app){
 
   //assume localhost
   var connect = function(dbName,next){
-    var db = mongo.db("localhost/" + dbName, {safe : true});
+    var db = mongo.db("mongodb://localhost:27017/" + dbName, { safe : true });
     next(db);
   }
   //stubbed query method for later use
@@ -32,11 +32,11 @@ var Congo = function(app){
   app.get("/mongo-api/dbs",function(req,res){
     var out = [];
     connect("admin",function(db){
-      db.admin.listDatabases(function(err,result){
+      db.admin().listDatabases(function(err,result){
         _.each(result.databases,function(item){
           var formatted = {
             name : item.name,
-            _url : "http://" + req.headers.host + "/mongo/" + item.name
+            _url : "http://" + req.headers.host + "/mongo-api/" + item.name
           };
           out.push(formatted);
         });
@@ -67,12 +67,12 @@ var Congo = function(app){
     var dbName = req.params.db;
     connect(dbName, function(db){
       var out = [];
-      db.collectionNames(function(err,collNames){
-        _.each(collNames, function(collName){
-          var cleanName = collName.name.replace(dbName + ".","");
+      db.collections(function(err,result) {
+        _.each(result, function(item){
+          var cleanName = item.collectionName;
           var formatted = {
             name : cleanName,
-            _url : "http://" + req.headers.host + "/mongo/" + dbName + "/" + cleanName,
+            _url : "http://" + req.headers.host + "/mongo-api/" + dbName + "/" + cleanName,
             database : dbName
           };
           if(cleanName != "system.indexes")
@@ -153,10 +153,12 @@ var Congo = function(app){
     connect(dbName, function(db){
       var doc = req.body;
       delete doc._id;
-      db.collection(req.params.collection).updateById(req.params.id, doc, {}, function(err,result){
+      console.log(JSON.stringify(doc));
+      db.collection(req.params.collection).updateById(req.params.id, doc, function(err,result){
         var out ={error : err, result : result}; 
         res.json(out);
       });
+      //res.json(doc);
     });
   });
 

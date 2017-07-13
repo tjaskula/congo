@@ -9,7 +9,6 @@ block content
     #details
     #editor
 
-
   script#editor-template(type = "text/backbone")
     .row
       #ace-editor.span9
@@ -22,26 +21,25 @@ block content
     .row
       #collection-list.span8
       #collection-options.span3
-
+    
   script#db-details-template(type="text/backbone")
     .row
       #database-list.span8
       #database-options.span3
-
+  
   script#document-details-template(type="text/backbone")
     .row
       .span12
         .row
           #document-list.span8
           #document-options.span3
-
-
+      
   script#new-db-template(type="text/backbone")
     form#addDb
-      input(id='newDb', type="text")
-      button.btn(type="submit")
-        i.icon.icon-plus-sign
-        | Add 
+        input(id="newDb", type="text")
+        button.btn(type="submit")
+          i.icon.icon-plus-sign
+          | Add Db
 
   script#new-collection-template(type="text/backbone")
     form#addCollection
@@ -62,16 +60,16 @@ block content
           | delete
 
   script#database-list-template(type="text/backbone")
-      td(width=60)
-        img(src="/img/database.png", style="height:24px")
-      td
-        h4
-          a(href="#", data-db!='<%=name%>') <%=name%>
-      td
-        button.btn
-          i.icon.icon-remove
-          | delete
-
+    td(width=60)
+      img(src="/img/database.png", style="height:24px")
+    td
+      h4
+        a(href="#", data-db!='<%=name%>') <%=name%>
+    td
+      button.btn
+        i.icon.icon-remove
+        | delete
+  
   script(id='new-document-template', type="text/template")
     button.btn(id='addDocument')
       i.icon.icon-plus-sign
@@ -89,7 +87,6 @@ block content
   script(src="/javascripts/congo/documents.js")
   script(src="/javascripts/ace/ace.js") 
   script(src="/javascripts/ace/mode-json.js")
-
 
   script.
     $(function(){

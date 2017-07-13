@@ -1,37 +1,35 @@
 Congo = {
-  init: function () {
-    //router
+  init : function () {
+    // router
     Congo.router = new Congo.Router();
 
-    //data
+    // data
     Congo.databases = new Congo.DatabaseCollection();
     Congo.currentCollection = new Congo.MongoCollections();
     Congo.currentDocuments = new Congo.MongoDocuments();
 
-    //views
-    Congo.breadcrumbs = new Congo.BreadcrumbView({ el: "#nav" });
-    Congo.collectionLayout = new Congo.CollectionLayoutView({ collection: Congo.currentCollection });
-    Congo.dbLayout = new Congo.DatabaseLayoutView({ collection: Congo.databases });
-    Congo.documentLayout = new Congo.DocumentLayoutView({ collection: Congo.currentDocuments })
-    Congo.editorView = new Congo.EditorView({el : "#editor"});
-    
-    //the App Layout
-    Congo.appLayout = new Congo.AppLayout({
-      el: "#app",
-      detailRegion: "#details",
-      editorRegion: "#editor",
-      navigatorView: Congo.breadcrumbs
-    })
-  },
+    // views
+    Congo.breadcrumbs = new Congo.BreadcrumbView({ el: "#nav"} );
+    Congo.collectionLayout = new Congo.CollectionLayoutView({ collection : Congo.currentCollection });
+    Congo.dbLayout = new Congo.DatabaseLayoutView({ collection : Congo.databases });
+    Congo.documentLayout = new Congo.DocumentLayoutView({ collection : Congo.currentDocuments });
+    Congo.editorView = new Congo.EditorView({ el : "#editor" });
 
-  start: function () {
-    //intialize the app
+    // the App layout
+    Congo.appLayout = new Congo.AppLayout({
+      el : "#app",
+      detailRegion : "#details",
+      editorRegion : "#editor",
+      navigatorView : Congo.breadcrumbs
+    });
+  },
+  start : function () {
+    // initialize the app
     Congo.init();
 
-    //for routing purposes
+    // for routing purposes
     Backbone.history.start();
   },
-
   navHome: function () {
     Congo.router.navigate("", true);
   },
@@ -49,12 +47,12 @@ Congo = {
 }
 
 Congo.Router = Backbone.Router.extend({
-  routes: {
-    "": "index",
-    ":db": "showDatabase",
-    ":db/:collection": "showCollection",
+  routes : {
+    "" : "index",
+    ":db" : "showDatabase",
+    ":db/:collection" : "showCollection",
     ":db/:collection/new": "newDocument",
-    ":db/:collection/:id": "showEditor"
+    ":db/:collection/:id" : "showEditor"
   },
   setState: function (db, collection, id) {
     if (db) Congo.currentDatabase = db;
@@ -65,27 +63,26 @@ Congo.Router = Backbone.Router.extend({
     this.setState(db, collection);
     Congo.appLayout.renderEditor();
   },
-
-  showEditor: function (db, collection, id) {
+  showEditor : function (db, collection, id) {
     this.setState(db, collection, id);
-    var document = new Congo.MongoDocument({ _id: id });
+    var document = new Congo.MongoDocument({ _id : id })
     document.fetch({
-      success: function (model) {
+      success : function (model) {
         Congo.appLayout.renderEditor(model);
       }
     });
   },
-  showDatabase: function (db) {
+  showDatabase : function(db) {
     this.setState(db);
     Congo.appLayout.renderDetails(Congo.collectionLayout);
     Congo.currentCollection.fetch();
   },
-  showCollection: function (db, collection) {
+  showCollection : function (db, collection) {
     this.setState(db, collection);
     Congo.appLayout.renderDetails(Congo.documentLayout);
     Congo.currentDocuments.fetch();
   },
-  index: function () {
+  index : function() {
     Congo.appLayout.renderDetails(Congo.dbLayout);
     Congo.databases.fetch();
   }

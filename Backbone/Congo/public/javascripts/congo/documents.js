@@ -1,17 +1,12 @@
 Congo.MongoDocument = Backbone.Model.extend({
   idAttribute: "_id",
   url: function () {
-    var baseUrl = "/mongo-api/" +
-    Congo.currentDatabase + "/" +
-    Congo.selectedCollection;
+    var baseUrl = "/mongo-api/" + Congo.currentDatabase + "/" + Congo.selectedCollection;
     if (this.isNew()) {
       return baseUrl;
     } else {
       return baseUrl + "/" + this.id;
     }
-  },
-  validate: function (atts,options) {
-    console.log(atts);
   },
   descriptor: function () {
     if (this.get("name"))
@@ -27,7 +22,6 @@ Congo.MongoDocument = Backbone.Model.extend({
     else
       return this.get("_id");
   }
-
 });
 
 Congo.MongoDocuments = Backbone.Collection.extend({
@@ -38,8 +32,8 @@ Congo.MongoDocuments = Backbone.Collection.extend({
 });
 
 Congo.EditorView = Congo.View.extend({
-  template: "#editor-template",
-  initialize: function () {
+  template : "#editor-template",
+  initialize : function () {
     this.render();
   },
   events: {
@@ -47,7 +41,6 @@ Congo.EditorView = Congo.View.extend({
     "click #delete-document" : "deleteDocument"
   },
   saveDocument: function () {
-
     var json = Congo.editor.getValue();
     try {
       var parsed = JSON.parse(json);
@@ -70,13 +63,13 @@ Congo.EditorView = Congo.View.extend({
       Congo.navCollection();
     }
   },
-  setModel: function (model) {
-    this.model = model || new Congo.MongoDocument();
+  setModel : function (model) {
+    this.model = model || new Congo.MongoDocument({});
     var docJSON = JSON.stringify(this.model.toJSON(), null, '  ');
     Congo.editor.setValue(docJSON);
     Congo.editor.selection.clearSelection();
   },
-  render: function () {
+  render : function () {
     var source = $(this.template).html();
     var compiled = _.template(source);
     this.$el.append(compiled);
@@ -84,9 +77,7 @@ Congo.EditorView = Congo.View.extend({
     Congo.editor = ace.edit("ace-editor");
     var JsonMode = require("ace/mode/json").Mode;
     Congo.editor.getSession().setMode(new JsonMode());
-    return this;
   }
-
 });
 
 Congo.DocumentView = Congo.ItemView.extend({
@@ -98,7 +89,8 @@ Congo.DocumentView = Congo.ItemView.extend({
   },
   show: function (ev) {
     ev.preventDefault();
-    Congo.navDocument(this.model.id);
+    var route = Congo.currentDatabase + "/" + Congo.selectedCollection + "/" + this.model.id;
+    Congo.router.navigate(route, true);
   },
   //override the render function as we're doing something
   //different with the model
