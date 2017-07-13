@@ -31,12 +31,13 @@ Congo.ListView = Backbone.View.extend({
   render : function() {
     var self = this;
     var els = [];
+    this.$el.empty();
     this.collection.each(function (item){
       var itemView = new self.ItemView({ model : item });
       els.push(itemView.render().el)
     });
       
-    this.$el.html(els);
+    this.$el.append(els);
     return this;
   }
 });
