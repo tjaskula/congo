@@ -4,8 +4,8 @@ Congo.View = Backbone.View.extend({
     var data = {};
     if (this.model)
       data = this.model.toJSON();
-    var compiled = _.template(source, data);
-    this.$el.html(compiled);
+    var compiled = _.template(source);
+    this.$el.html(compiled(data));
     return this;
   }
 });
@@ -36,7 +36,6 @@ Congo.ListView = Backbone.View.extend({
       var itemView = new self.ItemView({ model : item });
       els.push(itemView.render().el)
     });
-      
     this.$el.append(els);
     return this;
   }
