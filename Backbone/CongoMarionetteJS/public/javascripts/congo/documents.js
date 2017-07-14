@@ -84,13 +84,7 @@ Congo.DocumentView = Marionette.View.extend({
   template: "#document-item-template",
   className : "document pull-left",
   events: {
-    "click button": "removeDocument",
     "click a": "showDocument"
-  },
-  removeDocument : function () {
-    var confirmed = confirm("Delete this? You sure?");
-    if (confirmed)
-      this.model.destroy();
   },
   showDocument: function (ev) {
     ev.preventDefault();
