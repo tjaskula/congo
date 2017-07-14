@@ -31,8 +31,13 @@ Congo.DatabaseView = Marionette.View.extend({
   tagName : "tr",
   template : "#database-list-template",
   events : {
-    "click button" : "remove",
+    "click button" : "removeDb",
     "click a" : "showDb"
+  },
+  removeDb : function () {
+    var confirmed = confirm("Delete this? You sure?");
+    if (confirmed)
+      this.model.destroy();
   },
   showDb : function(ev) {
     ev.preventDefault();
@@ -41,10 +46,10 @@ Congo.DatabaseView = Marionette.View.extend({
   }
 });
 
-Congo.DatabaseListView = Congo.ListView.extend({
+Congo.DatabaseListView = Marionette.CollectionView.extend({
   tagName : "table",
   className : "table table-striped",
-  ItemView : Congo.DatabaseView
+  childView : Congo.DatabaseView
 });
 
 Congo.DatabaseLayoutView = Congo.Layout.extend({
