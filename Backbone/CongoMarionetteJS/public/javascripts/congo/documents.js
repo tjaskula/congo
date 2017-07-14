@@ -80,14 +80,19 @@ Congo.EditorView = Congo.View.extend({
   }
 });
 
-Congo.DocumentView = Congo.ItemView.extend({
+Congo.DocumentView = Marionette.View.extend({
   template: "#document-item-template",
   className : "document pull-left",
   events: {
-    "click button": "remove",
-    "click a": "show"
+    "click button": "removeDocument",
+    "click a": "showDocument"
   },
-  show: function (ev) {
+  removeDocument : function () {
+    var confirmed = confirm("Delete this? You sure?");
+    if (confirmed)
+      this.model.destroy();
+  },
+  showDocument: function (ev) {
     ev.preventDefault();
     var route = Congo.currentDatabase + "/" + Congo.selectedCollection + "/" + this.model.id;
     Congo.router.navigate(route, true);
@@ -103,8 +108,8 @@ Congo.DocumentView = Congo.ItemView.extend({
   }
 });
 
-Congo.DocumentListView = Congo.ListView.extend({
-  ItemView : Congo.DocumentView
+Congo.DocumentListView = Marionette.CollectionView.extend({
+  childView : Congo.DocumentView
 });
 
 Congo.DocumentOptionView = Congo.View.extend({
