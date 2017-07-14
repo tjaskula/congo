@@ -4,8 +4,8 @@ Congo.View = Backbone.View.extend({
     var data = {};
     if (this.model)
       data = this.model.toJSON();
-    var compiled = _.template(source, data);
-    this.$el.html(compiled);
+    var compiled = _.template(source);
+    this.$el.html(compiled(data));
     return this;
   }
 });
@@ -70,6 +70,9 @@ Congo.Layout = Backbone.View.extend({
 });
 
 Congo.AppLayout = Backbone.View.extend({
+  initialize: function(options) {
+    this.options = options;
+  },
   hideEverything: function () {
     this.$(this.options.detailRegion).empty();
     this.$(this.options.editorRegion).hide();

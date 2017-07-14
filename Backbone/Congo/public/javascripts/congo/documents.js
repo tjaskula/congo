@@ -97,8 +97,8 @@ Congo.DocumentView = Congo.ItemView.extend({
   render: function () {
     var source = $(this.template).html();
     var data = { descriptor: this.model.descriptor() };
-    var compiled = _.template(source, data);
-    this.$el.html(compiled);
+    var compiled = _.template(source);
+    this.$el.html(compiled(data));
     return this;
   }
 });
