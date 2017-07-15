@@ -20,6 +20,11 @@ Congo.CollectionView = Congo.ItemView.extend({
     "click button": "remove",
     "click a": "show"
   },
+  remove: function (ev) {
+    var confirmed = confirm("Delete this? You sure?");
+    if (confirmed)
+      this.model.destroy();
+  },
   show: function (ev) {
     ev.preventDefault();
     var collectionName = $(ev.currentTarget).data("collection");

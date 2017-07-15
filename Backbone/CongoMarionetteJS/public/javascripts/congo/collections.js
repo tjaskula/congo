@@ -17,10 +17,15 @@ Congo.CollectionView = Marionette.View.extend({
   tagName: "tr",
   template: "#collection-list-template",
   events: {
-    "click button": "remove",
-    "click a": "show"
+    "click button": "removeCol",
+    "click a": "showCol"
   },
-  show: function (ev) {
+  removeCol: function (ev) {
+    var confirmed = confirm("Delete this? You sure?");
+    if (confirmed)
+      this.model.destroy();
+  },
+  showCol: function (ev) {
     ev.preventDefault();
     var collectionName = $(ev.currentTarget).data("collection");
     Congo.router.navigate(Congo.currentDatabase + "/" + collectionName, true);    
