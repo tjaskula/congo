@@ -8,20 +8,20 @@ Congo = {
     Congo.currentCollection = new Congo.MongoCollections();
     Congo.currentDocuments = new Congo.MongoDocuments();
 
-    // views
-    Congo.breadcrumbs = new Congo.BreadcrumbView({ el: "#nav"} );
-    Congo.collectionLayout = new Congo.CollectionLayoutView({ collection : Congo.currentCollection });
-    Congo.dbLayout = new Congo.DatabaseLayoutView({ collection : Congo.databases });
-    Congo.documentLayout = new Congo.DocumentLayoutView({ collection : Congo.currentDocuments });
-    Congo.editorView = new Congo.EditorView({ el : "#editor" });
-
     // the App layout
-    Congo.appLayout = new Congo.AppLayout({
-      el : "#app",
-      detailRegion : "#details",
-      editorRegion : "#editor",
-      navigatorView : Congo.breadcrumbs
+    Congo.AppLayout = Marionette.View.extend({
+      initialize: function(options) {
+        this.options = options;
+      },
+      regions : {
+        navigationRegion : "#nav",
+        detailRegion : "#details"
+      }
     });
+
+    Congo.appLayout = new Congo.AppLayout({ el : "#app" });
+    var breadcrumbs = new Congo.BreadcrumbView();
+    Congo.appLayout.getRegion("navigationRegion").show(breadcrumbs);
   },
   start : function () {
     // initialize the app
@@ -68,22 +68,26 @@ Congo.Router = Backbone.Router.extend({
     var document = new Congo.MongoDocument({ _id : id })
     document.fetch({
       success : function (model) {
-        Congo.appLayout.renderEditor(model);
+        var editorView = new Congo.EditorView({model: model });
+        Congo.appLayout.getRegion("detailRegion").show(editorView);
       }
     });
   },
   showDatabase : function(db) {
     this.setState(db);
-    Congo.appLayout.renderDetails(Congo.collectionLayout);
+    var collectionLoyout = new Congo.CollectionLayoutView({ collection : Congo.currentCollection });
+    Congo.appLayout.getRegion("detailRegion").show(collectionLoyout);
     Congo.currentCollection.fetch();
   },
   showCollection : function (db, collection) {
     this.setState(db, collection);
-    Congo.appLayout.renderDetails(Congo.documentLayout);
+    var documentLayout = new Congo.DocumentLayoutView({ collection : Congo.currentDocuments });
+    Congo.appLayout.getRegion("detailRegion").show(documentLayout);
     Congo.currentDocuments.fetch();
   },
   index : function() {
-    Congo.appLayout.renderDetails(Congo.dbLayout);
+    var dbLayout = new Congo.DatabaseLayoutView({ collection : Congo.databases });
+    Congo.appLayout.getRegion("detailRegion").show(dbLayout);
     Congo.databases.fetch();
   }
 });

@@ -31,17 +31,14 @@ Congo.MongoDocuments = Backbone.Collection.extend({
   }
 });
 
-Congo.EditorView = Congo.View.extend({
+Congo.EditorView = Marionette.View.extend({
   template : "#editor-template",
-  initialize : function () {
-    this.render();
-  },
   events: {
     "click #save-document": "saveDocument",
     "click #delete-document" : "deleteDocument"
   },
   saveDocument: function () {
-    var json = Congo.editor.getValue();
+    var json = this.editor.getValue();
     try {
       var parsed = JSON.parse(json);
       var newDocument = new Congo.MongoDocument(parsed);
@@ -63,20 +60,15 @@ Congo.EditorView = Congo.View.extend({
       Congo.navCollection();
     }
   },
-  setModel : function (model) {
-    this.model = model || new Congo.MongoDocument({});
-    var docJSON = JSON.stringify(this.model.toJSON(), null, '  ');
-    Congo.editor.setValue(docJSON);
-    Congo.editor.selection.clearSelection();
-  },
-  render : function () {
-    var source = $(this.template).html();
-    var compiled = _.template(source);
-    this.$el.append(compiled);
-
-    Congo.editor = ace.edit("ace-editor");
+  onDomRefresh : function () {
+    this.editor = ace.edit("ace-editor");
     var JsonMode = require("ace/mode/json").Mode;
-    Congo.editor.getSession().setMode(new JsonMode());
+    this.editor.getSession().setMode(new JsonMode());
+
+    this.model = this.model || new Congo.MongoDocument({});
+    var docJSON = JSON.stringify(this.model.toJSON(), null, '  ');
+    this.editor.setValue(docJSON);
+    this.editor.selection.clearSelection();
   }
 });
 

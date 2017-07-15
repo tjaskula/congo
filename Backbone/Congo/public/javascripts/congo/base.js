@@ -70,25 +70,4 @@ Congo.Layout = Backbone.View.extend({
 });
 
 Congo.AppLayout = Backbone.View.extend({
-  initialize: function(options) {
-    this.options = options;
-  },
-  hideEverything: function () {
-    this.$(this.options.detailRegion).empty();
-    this.$(this.options.editorRegion).hide();
-  },
-  renderEditor: function (thing) {
-    this.hideEverything();
-    Congo.editorView.setModel(thing);
-
-    //render out the ace editor
-    this.$(this.options.editorRegion).show();
-  },
-  renderDetails : function (detailView) {
-    // pass the region in on init...
-    this.hideEverything();
-    this.$(this.options.detailRegion).empty();
-    detailView.render();
-    this.$(this.options.detailRegion).append(detailView.el);
-  }
 });
