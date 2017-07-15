@@ -1,7 +1,7 @@
 Congo = Marionette.Application.extend({
   initialize : function (options) {
     // router
-    Congo.router = new Congo.Router();
+    Congo.router = new Congo.Router({ controller : new Congo.Controller()});
 
     // data
     Congo.databases = new Congo.DatabaseCollection();
@@ -45,14 +45,7 @@ Congo.navDocument = function (id) {
   Congo.router.navigate(Congo.currentDatabase + "/" + Congo.selectedCollection + "/" + id, true);
 };
 
-Congo.Router = Backbone.Router.extend({
-  routes : {
-    "" : "index",
-    ":db" : "showDatabase",
-    ":db/:collection" : "showCollection",
-    ":db/:collection/new": "newDocument",
-    ":db/:collection/:id" : "showEditor"
-  },
+Congo.Controller = Marionette.Object.extend({
   setState: function (db, collection, id) {
     if (db) Congo.currentDatabase = db;
     if (collection) Congo.selectedCollection = collection;
@@ -89,5 +82,15 @@ Congo.Router = Backbone.Router.extend({
     var dbLayout = new Congo.DatabaseLayoutView({ collection : Congo.databases });
     Congo.appLayout.getRegion("detailRegion").show(dbLayout);
     Congo.databases.fetch();
+  }
+});
+
+Congo.Router = Marionette.AppRouter.extend({
+  appRoutes: {
+    "" : "index",
+    ":db" : "showDatabase",
+    ":db/:collection" : "showCollection",
+    ":db/:collection/new": "newDocument",
+    ":db/:collection/:id" : "showEditor"
   }
 });
