@@ -1,5 +1,5 @@
-Congo = {
-  init : function () {
+Congo = Marionette.Application.extend({
+  initialize : function (options) {
     // router
     Congo.router = new Congo.Router();
 
@@ -20,31 +20,30 @@ Congo = {
     });
 
     Congo.appLayout = new Congo.AppLayout({ el : "#app" });
-    var breadcrumbs = new Congo.BreadcrumbView();
-    Congo.appLayout.getRegion("navigationRegion").show(breadcrumbs);
   },
-  start : function () {
-    // initialize the app
-    Congo.init();
+  onStart : function () {
+    // show the crumbs
+    Congo.appLayout.getRegion("navigationRegion").show(new Congo.BreadcrumbView());
 
     // for routing purposes
     Backbone.history.start();
-  },
-  navHome: function () {
-    Congo.router.navigate("", true);
-  },
-  navDatabase: function (db) {
-    db = db || Congo.currentDatabase;
-    Congo.router.navigate(db, true);
-  },
-  navCollection: function (collection) {
-    collection = collection || Congo.selectedCollection;
-    Congo.router.navigate(Congo.currentDatabase + "/" + collection, true);
-  },
-  navDocument: function (id) {
-    Congo.router.navigate(Congo.currentDatabase + "/" + Congo.selectedCollection + "/" + id, true);
   }
-}
+});
+
+Congo.navHome = function () {
+  Congo.router.navigate("", true);
+};
+Congo.navDatabase = function (db) {
+  db = db || Congo.currentDatabase;
+  Congo.router.navigate(db, true);
+};
+Congo.navCollection = function (collection) {
+  collection = collection || Congo.selectedCollection;
+  Congo.router.navigate(Congo.currentDatabase + "/" + collection, true);
+};
+Congo.navDocument = function (id) {
+  Congo.router.navigate(Congo.currentDatabase + "/" + Congo.selectedCollection + "/" + id, true);
+};
 
 Congo.Router = Backbone.Router.extend({
   routes : {
@@ -61,7 +60,8 @@ Congo.Router = Backbone.Router.extend({
   },
   newDocument: function (db, collection) {
     this.setState(db, collection);
-    Congo.appLayout.renderEditor();
+    var editorView = new Congo.EditorView({ model: new Congo.MongoDocument });
+    Congo.appLayout.getRegion("detailRegion").show(editorView);
   },
   showEditor : function (db, collection, id) {
     this.setState(db, collection, id);

@@ -83,8 +83,6 @@ Congo.DocumentView = Marionette.View.extend({
     var route = Congo.currentDatabase + "/" + Congo.selectedCollection + "/" + this.model.id;
     Congo.router.navigate(route, true);
   },
-  //override the render function as we're doing something
-  //different with the model
   render: function () {
     var source = $(this.template).html();
     var data = { descriptor: this.model.descriptor() };
@@ -98,10 +96,7 @@ Congo.DocumentListView = Marionette.CollectionView.extend({
   childView : Congo.DocumentView
 });
 
-Congo.DocumentOptionView = Congo.View.extend({
-  initialize: function () {
-    this.render();
-  },
+Congo.DocumentOptionView = Marionette.View.extend({
   template: "#new-document-template",
   events: {
     "click button": "addDocument"
@@ -112,16 +107,19 @@ Congo.DocumentOptionView = Congo.View.extend({
   }
 });
 
-Congo.DocumentLayoutView = Congo.Layout.extend({
+Congo.DocumentLayoutView = Marionette.View.extend({
+  initialize: function(){
+    this.collection.on("sync", this.render, this);
+  },
   template: "#document-details-template",
   regions: {
     documentList: "#document-list",
     documentOptions: "#document-options"
   },
-  layoutReady: function () {
+  onRender: function () {
     var documentListListView = new Congo.DocumentListView({ collection: this.collection });
     var optionView = new Congo.DocumentOptionView({});
-    this.documentList.append(documentListListView.render().el);
-    this.documentOptions.append(optionView.render().el);
+    this.getRegion("documentList").show(documentListListView);
+    this.getRegion("documentOptions").show(optionView);
   }
 })

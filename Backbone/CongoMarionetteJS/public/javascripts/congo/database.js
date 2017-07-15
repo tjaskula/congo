@@ -10,10 +10,7 @@ Congo.DatabaseCollection = Backbone.Collection.extend({
   url : "mongo-api/dbs"
 });
 
-Congo.DatabaseOptionView = Congo.View.extend({
-  initialize : function () {
-    this.render();
-  },
+Congo.DatabaseOptionView = Marionette.View.extend({
   template : "#new-db-template",
   events : {
     "submit form" : "addDb"
@@ -52,17 +49,16 @@ Congo.DatabaseListView = Marionette.CollectionView.extend({
   childView : Congo.DatabaseView
 });
 
-Congo.DatabaseLayoutView = Congo.Layout.extend({
+Congo.DatabaseLayoutView = Marionette.View.extend({
   template : "#db-details-template",
   regions : {
     databaseList : "#database-list",
     databaseOptions : "#database-options"
   },
-  layoutReady : function () {
+  onRender : function () {
     var dbListView = new Congo.DatabaseListView({ collection : this.collection });
     var dbOptionView = new Congo.DatabaseOptionView({});
-
-    this.databaseList.append(dbListView.render().el);
-    this.databaseOptions.append(dbOptionView.render().el);
+    this.getRegion("databaseList").show(dbListView);
+    this.getRegion("databaseOptions").show(dbOptionView);
   }
 });

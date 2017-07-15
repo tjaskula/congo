@@ -13,7 +13,7 @@ Congo.MongoCollections = Backbone.Collection.extend({
   }
 });
 
-Congo.CollectionView = Congo.ItemView.extend({
+Congo.CollectionView = Marionette.View.extend({
   tagName: "tr",
   template: "#collection-list-template",
   events: {
@@ -27,16 +27,13 @@ Congo.CollectionView = Congo.ItemView.extend({
   }
 });
 
-Congo.CollectionListView = Congo.ListView.extend({
+Congo.CollectionListView = Marionette.CollectionView.extend({
   tagName: "table",
   className: "table table-striped",
-  ItemView : Congo.CollectionView
+  childView : Congo.CollectionView
 });
 
-Congo.CollectionOptionView = Congo.View.extend({
-  initialize: function () {
-    this.render();
-  },
+Congo.CollectionOptionView = Marionette.View.extend({
   template : "#new-collection-template",
   events: {
     "submit form": "addCollection"
@@ -50,16 +47,16 @@ Congo.CollectionOptionView = Congo.View.extend({
   }
 });
 
-Congo.CollectionLayoutView = Congo.Layout.extend({
+Congo.CollectionLayoutView = Marionette.View.extend({
   template: "#collection-details-template",
   regions: {
     collectionList: "#collection-list",
     collectionOptions: "#collection-options"
   },
-  layoutReady: function () {
+  onRender: function () {
     var collectionListView = new Congo.CollectionListView({ collection: this.collection });
     var optionView = new Congo.CollectionOptionView({});
-    this.collectionList.append(collectionListView.render().el);
-    this.collectionOptions.append(optionView.render().el);
+    this.getRegion("collectionList").show(collectionListView);
+    this.getRegion("collectionOptions").show(optionView);
   }
 })
