@@ -42,3 +42,7 @@
 #document-summary-list li{
   overflow : hidden;
 }
+
+.navbar-brand {
+  font-weight: 200
+}

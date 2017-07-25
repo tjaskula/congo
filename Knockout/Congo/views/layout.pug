@@ -6,14 +6,13 @@ head
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='description', content='')
     meta(name='author', content='')
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
     link(rel='stylesheet', href='/stylesheets/overrides.css')
     
-    script(src= "/javascripts/jquery.js")
-    script(src= "/javascripts/jquery-ui.js")
-    script(src= "/javascripts/underscore.js")
-
+    script(src= "/javascripts/jquery.min.js")
+    script(src= "/javascripts/jquery-ui.min.js")
+    script(src= "/javascripts/underscore-min.js")
     script(src= "/javascripts/bootstrap.min.js") 
 
 
@@ -27,16 +26,15 @@ head
     //
 body
   
-  .navbar.navbar-inverse.navbar-fixed-top
-    .navbar-inner
-      .container
-        a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.brand(href='#') Kongo
-        .nav-collapse.collapse
-          ul#nav-items.nav
+  nav.navbar.navbar-inverse.navbar-fixed-top
+    .container
+      button.navbar-toggle(data-toggle='collapse', data-target='.navbar-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='#') Kongo
+      .navbar-collapse.collapse
+        ul#nav-items.nav
 
   .container
   
