@@ -38,6 +38,7 @@ app.use('/javascripts', express.static(__dirname + '/node_modules/bootstrap/dist
 app.use('/javascripts', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/jquery-ui-dist'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/underscore'));
+app.use('/javascripts', express.static(__dirname + '/node_modules/knockout/build/output'));
 app.use('/stylesheets', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 // catch 404 and forward to error handler
