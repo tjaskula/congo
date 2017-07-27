@@ -1,3 +1,4 @@
+'use strict';
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -21,7 +22,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
 }));
 app.use(methodOverride());
 app.use(cookieParser());
@@ -32,7 +33,7 @@ app.use('development', errorHandler({ dumpExceptions: true, showStack: true }));
 app.use('production', errorHandler);
 
 // Routes
-var congo = require("./lib/congo")(app);
+var congo = require('./lib/congo')(app);
 app.use('/', routes.index);
 app.use('/javascripts', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/jquery/dist'));
@@ -42,13 +43,10 @@ app.use('/javascripts', express.static(__dirname + '/node_modules/knockout/build
 app.use('/stylesheets', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
-// var listener = app.listen(3000, function(){
-//     console.log('Listening on port ' + listener.address().port); //Listening on port 3000
-// });
 
 module.exports = app;
