@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "webpack": "^3.4.1",
+    "webpack-bundle-analyzer": "^2.8.3",
     "webpack-dev-server": "^2.6.1"
   }
 }
