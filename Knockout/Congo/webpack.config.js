@@ -10,19 +10,22 @@ function resolve(filePath) {
 module.exports = {
   devtool: 'source-map',
   entry: {
-    vendors: ['knockout', 'jquery', 'jquery-ui', 'underscore', 'bootstrap']
+    vendors: ['knockout', 'jquery', 'underscore', 'bootstrap']
   },
   output: {
     path: resolve('./public/javascripts'),
     publicPath: '/public/javascripts',
     filename: '[name].js'
   },
-  resolve: {
+  /*resolve: {
     alias: {
       'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
     }
-  },
+  },*/
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors',
+    }),
     new BundleAnalyzerPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
