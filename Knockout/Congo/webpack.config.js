@@ -24,11 +24,11 @@ module.exports = {
   },*/
   module: {
     loaders: [
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
+      /*{ test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
-      { test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' }
+      { test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000&name=public/fonts/[name].[ext]' },
+      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=public/fonts/[name].[ext]' },
+      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]' }*/
     ]
   },
   plugins: [
