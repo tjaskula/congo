@@ -13,9 +13,9 @@ module.exports = {
     vendors: ['./public/javascripts/congo/main.js', 'knockout', 'jquery', 'underscore', 'bootstrap']
   },
   output: {
-    path: resolve('./public/javascripts'),
-    publicPath: '/public/javascripts',
-    filename: '[name].js'
+    path: resolve('./public'),
+    publicPath: '/public',
+    filename: 'javascripts/[name].js'
   },
   /*resolve: {
     alias: {
@@ -24,11 +24,11 @@ module.exports = {
   },*/
   module: {
     loaders: [
-      /*{ test: /\.css$/, loader: 'style-loader!css-loader' },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader' },
-      { test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000&name=public/fonts/[name].[ext]' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=public/fonts/[name].[ext]' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]' }*/
+      { test: /\.css$/, loader: 'style-loader!css-loader' },
+      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?mimetype=application/vnd.ms-fontobject&name=./fonts/[name].[ext]' },
+      { test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000&name=./fonts/[name].[ext]' },
+      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=./fonts/[name].[ext]' },
+      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=./fonts/[name].[ext]' }
     ]
   },
   plugins: [
