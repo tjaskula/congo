@@ -10,7 +10,7 @@ function resolve(filePath) {
 module.exports = {
   devtool: 'source-map',
   entry: {
-    vendors: ['./public/javascripts/congo/main.js', 'knockout', 'jquery', 'underscore', 'bootstrap']
+    vendors: ['./public/javascripts/congo/main.js', 'jquery', 'knockout', 'underscore', 'bootstrap']
   },
   output: {
     path: resolve('./public'),
@@ -32,10 +32,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors',
-    }),
-    new BundleAnalyzerPlugin(),
+    //new BundleAnalyzerPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
