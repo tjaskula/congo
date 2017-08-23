@@ -10,18 +10,19 @@ function resolve(filePath) {
 module.exports = {
   devtool: 'source-map',
   entry: {
-    vendors: ['./public/javascripts/congo/main.js', 'jquery', 'knockout', 'underscore', 'bootstrap']
+    vendors: ['./public/javascripts/congo/main.js', 'knockout', 'underscore', 'bootstrap', 'jquery']
   },
   output: {
     path: resolve('./public'),
     publicPath: '/public',
     filename: 'javascripts/[name].js'
   },
-  /*resolve: {
+  resolve: {
     alias: {
-      'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
+      //'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
+      jquery: "jquery/src/jquery"
     }
-  },*/
+  },
   module: {
     loaders: [
       { test: /\.css$/, loader: 'style-loader!css-loader' },
@@ -32,7 +33,7 @@ module.exports = {
     ]
   },
   plugins: [
-    //new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
