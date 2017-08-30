@@ -20,7 +20,8 @@ module.exports = {
   resolve: {
     alias: {
       //'jquery-ui': 'jquery-ui-dist/jquery-ui.js'
-      jquery: "jquery/src/jquery"
+      jquery: 'jquery/src/jquery',
+      knockout: 'knockout/build/output/knockout-latest.js'
     }
   },
   module: {
@@ -33,11 +34,12 @@ module.exports = {
     ]
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
+    //new BundleAnalyzerPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-      'window.jQuery': 'jquery'
+      'window.jQuery': 'jquery',
+      ko: 'knockout'
     }),
     new webpack.optimize.UglifyJsPlugin()
   ]

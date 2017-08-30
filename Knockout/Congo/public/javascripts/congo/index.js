@@ -12,7 +12,7 @@ Congo = {
   start : function () {
     // initialize the app
     Congo.init();
-
+    
     // for routing purposes
     
   },
