@@ -10,7 +10,8 @@ function resolve(filePath) {
 module.exports = {
   devtool: 'source-map',
   entry: {
-    vendors: ['./public/javascripts/congo/main.js', 'knockout', 'underscore', 'bootstrap', 'jquery']
+    vendors: ['./public/javascripts/main.js', 'knockout', 'underscore', 'bootstrap', 'jquery'],
+    congo: './public/javascripts/congo/index.js'
   },
   output: {
     path: resolve('./public'),

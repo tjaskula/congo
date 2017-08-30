@@ -10,6 +10,9 @@ Congo = {
     
   },
   start : function () {
+
+    ko.applyBindings({});
+
     // initialize the app
     Congo.init();
     
