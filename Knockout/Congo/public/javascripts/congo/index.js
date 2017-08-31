@@ -1,5 +1,6 @@
 Congo = {
   init : function () {
+    // taken from http://jsfiddle.net/x36r0t3L/
     /* ---- Begin integration of Underscore template engine with Knockout. Could go in a separate file of course. ---- */
     ko.underscoreTemplateEngine = function () { }
     ko.underscoreTemplateEngine.prototype = ko.utils.extend(new ko.templateEngine(), {
