@@ -9,6 +9,14 @@ block content
     #details
     #editor
 
+  ul(data-bind="template: { name: 'peopleList' }")
+
+  script(type="text/html", id="peopleList")
+      <% _.each(people(), function(person) { %>
+        .li
+          .b(data-bind="text: person.name") is <%= person.age %> years old
+      <% }) %>
+
   script#editor-template(type = "text/backbone")
     .row
       #ace-editor.span9

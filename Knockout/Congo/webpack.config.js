@@ -40,7 +40,8 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
-      ko: 'knockout'
+      ko: 'knockout',
+      _: 'underscore'
     }),
     new webpack.optimize.UglifyJsPlugin()
   ]
