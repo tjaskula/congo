@@ -17,8 +17,8 @@ Congo.breadcrumbViewModel = function() {
     crumbSeparator = function () {
       return "<span class='divider'>/</span></h3></li>";
     },
-    showHomeLink = ko.observable(crumbWithLink("DATABASES", "navIndex", true))
+    showCrumbs = ko.observable(crumb("DATABASES"))
     return {
-      showHomeLink : showHomeLink
+      showCrumbs : showCrumbs
     }
 };
