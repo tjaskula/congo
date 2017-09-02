@@ -11,7 +11,8 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     vendors: ['./public/javascripts/main.js', 'knockout', 'underscore', 'bootstrap', 'jquery'],
-    congo: './public/javascripts/congo/index.js'
+    congo: ['./public/javascripts/congo/index.js',
+            './public/javascripts/congo/base.js']
   },
   output: {
     path: resolve('./public'),

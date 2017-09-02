@@ -8,9 +8,8 @@ block content
 
     #details
     #editor
-
+  
   ul(data-bind="template: { name: 'peopleList' }")
-
   script(type="text/html", id="peopleList")
       <% _.each(people(), function(person) { %>
         .li
