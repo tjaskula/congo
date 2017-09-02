@@ -1,3 +1,9 @@
+Congo.View = function(title, templateName, data) {
+    this.title = title;
+    this.templateName = templateName;
+    this.data = data; 
+ };
+
 Congo.initTemplateEngine = function() {
     // taken from http://jsfiddle.net/x36r0t3L/
     /* ---- Begin integration of Underscore template engine with Knockout. Could go in a separate file of course. ---- */
