@@ -3,23 +3,19 @@ Congo = {
     
     Congo.initTemplateEngine();
 
-    var viewModel = {
-      people: ko.observableArray([
-          { name: 'Rod', age: 123 },
-          { name: 'Jane', age: 125 },
-      ])        
-    };
-    
-    ko.applyBindings(viewModel);
-
-    // router
-
-    // data
-
-    // views
+    // var viewModel = {
+    //   people: ko.observableArray([
+    //       { name: 'Rod', age: 123 },
+    //       { name: 'Jane', age: 125 },
+    //   ])        
+    // };
 
     // the App layout
+    var appViewModel = {
+      navViewModel: new Congo.breadcrumbViewModel()
+    };
     
+    ko.applyBindings(appViewModel);
   },
   start : function () {
 

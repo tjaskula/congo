@@ -12,7 +12,8 @@ module.exports = {
   entry: {
     vendors: ['./public/javascripts/main.js', 'knockout', 'underscore', 'bootstrap', 'jquery'],
     congo: ['./public/javascripts/congo/index.js',
-            './public/javascripts/congo/base.js']
+            './public/javascripts/congo/base.js',
+            './public/javascripts/congo/nav.js']
   },
   output: {
     path: resolve('./public'),
