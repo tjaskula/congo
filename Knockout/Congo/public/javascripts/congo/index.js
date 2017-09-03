@@ -1,5 +1,5 @@
 Congo = {
-  init : function () {
+  init: function () {
     
     Congo.initTemplateEngine();
 
@@ -11,13 +11,14 @@ Congo = {
     // };
 
     // the App layout
-    var appViewModel = {
-      navViewModel: new Congo.breadcrumbViewModel()
+    Congo.appViewModel = {
+      navViewModel: new Congo.breadcrumbViewModel(),
+      detailsViewModel: new Congo.databasesViewModel()
     };
     
-    ko.applyBindings(appViewModel);
+    ko.applyBindings(Congo.appViewModel);
   },
-  start : function () {
+  start: function () {
 
     // initialize the app
     Congo.init();

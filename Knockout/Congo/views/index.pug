@@ -6,7 +6,7 @@ block content
       .span12
         ul#nav.breadcrumb(data-bind="html: navViewModel.showCrumbs")
 
-    #details
+    #details(data-bind="template: { name: detailsViewModel.templateName, data: detailsViewModel }")
     #editor
   
   //- ul(data-bind="template: { name: 'peopleList' }")
@@ -29,10 +29,13 @@ block content
       #collection-list.span8
       #collection-options.span3
     
-  script#db-details-template(type="text/backbone")
+  script#db-details-template(type="text/html")
     .row
-      #database-list.span8
-      #database-options.span3
+      <% _.each(data, function(dataItem) { %>
+        .span8(data-bind="attr: { 'data-id': dataItem.id }, text: dataItem.name")
+      <% }) %>
+      //#database-list.span8
+      //#database-options.span3
   
   script#document-details-template(type="text/backbone")
     .row
