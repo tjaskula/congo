@@ -1,0 +1,14 @@
+{
+  "name": "congo",
+  "version": "1.0.0",
+  "description": "Congo application for MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tomasz Jaskula",
+  "license": "MIT",
+  "devDependencies": {
+    "nwb": "^0.18.10"
+  }
+}
