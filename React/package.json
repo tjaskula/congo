@@ -4,7 +4,8 @@
   "description": "Congo application for MongoDB",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nwb serve-react-app",
+    "build": "nwb build-react-app"
   },
   "author": "Tomasz Jaskula",
   "license": "MIT",
