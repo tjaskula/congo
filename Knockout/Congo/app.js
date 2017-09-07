@@ -13,6 +13,9 @@ var routes = require('./routes');
 var app = express();
 var router = express.Router();
 
+var isProduction = process.env.NODE_ENV === 'production';
+var port = isProduction ? process.env.PORT : 3000;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -29,7 +32,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('development', errorHandler({ dumpExceptions: true, showStack: true }));
-
 app.use('production', errorHandler);
 
 // Routes
@@ -41,6 +43,11 @@ app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+});
+
+// And run the server
+app.listen(port, function () {
+  console.log('Server running on port ' + port);
 });
 
 module.exports = app;
