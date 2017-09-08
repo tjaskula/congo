@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "http-proxy": "^1.16.2"
+  }
+}

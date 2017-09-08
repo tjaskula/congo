@@ -7,26 +7,19 @@ function resolve(filePath) {
   return path.join(__dirname, filePath);
 }
 
-var nodeModulesPath = path.resolve(__dirname, 'node_modules');
-var buildPath = path.resolve(__dirname, 'public', 'build');
-
 module.exports = {
-  devtool: 'eval',
-  entry: [
-      // For hot style updates
-      'webpack/hot/dev-server',
-      // The script refreshing the browser on none hot updates
-      'webpack-dev-server/client?http://localhost:8080',
-      './public/javascripts/main.js', 'knockout', 'underscore', 'bootstrap', 'jquery',
-      './public/javascripts/congo/index.js',
-      './public/javascripts/congo/base.js',
-      './public/javascripts/congo/nav.js',
-      './public/javascripts/congo/database.js'
-  ],
+  devtool: 'source-map',
+  entry: {
+    vendors: ['./public/javascripts/main.js', 'knockout', 'underscore', 'bootstrap', 'jquery'],
+    congo: ['./public/javascripts/congo/index.js',
+            './public/javascripts/congo/base.js',
+            './public/javascripts/congo/nav.js',
+            './public/javascripts/congo/database.js']
+  },
   output: {
-    path: buildPath,
-    publicPath: '/javascripts/',
-    filename: 'bundle.js'
+    path: resolve('./public'),
+    publicPath: '/public',
+    filename: 'javascripts/[name].js'
   },
   resolve: {
     alias: {
@@ -53,6 +46,6 @@ module.exports = {
       ko: 'knockout',
       _: 'underscore'
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.optimize.UglifyJsPlugin()
   ]
 };

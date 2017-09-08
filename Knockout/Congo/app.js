@@ -7,6 +7,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
+var httpProxy = require('http-proxy');
+
+var proxy = httpProxy.createProxyServer();
 
 var routes = require('./routes');
 
@@ -30,6 +33,31 @@ app.use(bodyParser.urlencoded({
 app.use(methodOverride());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// We only want to run the workflow when not in production
+if (!isProduction) {
+  
+    // We require the bundler inside the if block because
+    // it is only needed in a development environment. Later
+    // you will see why this is a good idea
+    var bundle = require('./server/bundle.js');
+    bundle();
+  
+    // Any requests to localhost:3000/javascripts is proxied
+    // to webpack-dev-server
+    app.all('/javascripts/*', function (req, res) {
+      proxy.web(req, res, {
+          target: 'http://localhost:8080'
+      });
+    });
+  }
+
+// It is important to catch any errors from the proxy or the
+// server will crash. An example of this is connecting to the
+// server when webpack is bundling
+proxy.on('error', function(e) {
+  console.log('Could not connect to proxy, please try again...');
+});
 
 app.use('development', errorHandler({ dumpExceptions: true, showStack: true }));
 app.use('production', errorHandler);
