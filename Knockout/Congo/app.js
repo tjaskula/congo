@@ -45,7 +45,7 @@ if (!isProduction) {
   
     // Any requests to localhost:3000/javascripts is proxied
     // to webpack-dev-server
-    app.all('/javascripts/*', function (req, res) {
+    app.all('/build/*', function (req, res) {
       proxy.web(req, res, {
           target: 'http://localhost:8080'
       });

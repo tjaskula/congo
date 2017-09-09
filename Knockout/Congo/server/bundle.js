@@ -29,8 +29,8 @@ module.exports = function () {
 
     // We need to tell Webpack to serve our bundled application
     // from the build path. When proxying:
-    // http://localhost:3000/javascripts -> http://localhost:8080/javascripts
-    publicPath: path.resolve(__dirname, 'public', 'javascripts'),
+    // http://localhost:3000/build -> http://localhost:8080/build
+    publicPath: '/build/',
 
     // Configure hot replacement
     hot: true,

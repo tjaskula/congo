@@ -25,7 +25,7 @@ module.exports = {
   ],
   output: {
     path: buildPath,
-    publicPath: '/javascripts/',
+    publicPath: '/build/',
     filename: 'bundle.js'
   },
   resolve: {
