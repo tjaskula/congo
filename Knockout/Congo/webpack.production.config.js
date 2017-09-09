@@ -7,6 +7,9 @@ function resolve(filePath) {
   return path.join(__dirname, filePath);
 }
 
+var nodeModulesPath = path.resolve(__dirname, 'node_modules');
+var buildPath = path.resolve(__dirname, 'public', 'build');
+
 module.exports = {
   devtool: 'source-map',
   entry: {
@@ -17,9 +20,9 @@ module.exports = {
             './public/javascripts/congo/database.js']
   },
   output: {
-    path: resolve('./public'),
-    publicPath: '/public',
-    filename: 'javascripts/[name].js'
+    path: buildPath,
+    publicPath: '/build/',
+    filename: '[name].js'
   },
   resolve: {
     alias: {
@@ -45,7 +48,6 @@ module.exports = {
       'window.jQuery': 'jquery',
       ko: 'knockout',
       _: 'underscore'
-    }),
-    new webpack.optimize.UglifyJsPlugin()
+    })
   ]
 };
