@@ -59,3 +59,6 @@ typings/
 
 # web storm IDE
 .idea
+
+#build javascript output from webpack
+build/
