@@ -6,7 +6,7 @@ block content
       .span12
         ul#nav.breadcrumb(data-bind="html: navViewModel.showCrumbs")
 
-    #details(data-bind="template: { name: detailsViewModel.view.templateName, data: detailsViewModel.view }")
+    #details(data-bind="template: { name: detailsViewModel.view.templateName, data: detailsViewModel.view.data }")
     #editor
   
   //- ul(data-bind="template: { name: 'peopleList' }")
@@ -31,15 +31,22 @@ block content
     
   script#db-details-template(type="text/html")
     .row
-      .span8(data-bind="template: { name: data.view.templateName, data: data.view }")
+      .span8
+        table.table.table-striped
+          tbody(data-bind="template: { name: view.templateName, foreach: view.data }")
       //#database-options.span3
-
-  script#database-list(type="text/html")
-    table.table.table-striped
-      <% _.each(data, function(dataItem) { %>
-        tr
-          td(data-bind="attr: { 'data-id': dataItem.id }, text: dataItem.name")
-      <% }) %>
+  
+  script#database-list-template(type="text/html")
+    tr
+      td(width=60)
+        img(src="/img/database.png", style="height:24px")
+      td
+        h4
+          a(data-bind="attr: { href: '#', 'data-db': name }, text: name")
+      td
+        button.btn
+          i.icon.icon-remove
+          | delete
   
   script#document-details-template(type="text/backbone")
     .row
@@ -72,17 +79,6 @@ block content
         button.btn
           i.icon.icon-remove
           | delete
-
-  script#database-list-template(type="text/backbone")
-    td(width=60)
-      img(src="/img/database.png", style="height:24px")
-    td
-      h4
-        a(href="#", data-db!='<%=name%>') <%=name%>
-    td
-      button.btn
-        i.icon.icon-remove
-        | delete
   
   script(id='new-document-template', type="text/template")
     button.btn(id='addDocument')
