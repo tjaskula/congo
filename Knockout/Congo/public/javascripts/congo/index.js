@@ -13,7 +13,7 @@ Congo = {
     // the App layout
     Congo.appViewModel = {
       navViewModel: new Congo.breadcrumbViewModel(),
-      detailsViewModel: new Congo.databasesViewModel()
+      detailsViewModel: new Congo.databasesLayoutViewModel()
     };
     
     ko.applyBindings(Congo.appViewModel);

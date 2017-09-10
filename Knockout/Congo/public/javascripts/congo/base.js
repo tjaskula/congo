@@ -1,7 +1,10 @@
-Congo.View = function(title, templateName, data) {
-    this.title = title;
+Congo.View = function(templateName, data, isReady) {
+    // this.templateName = ko.observable(templateName);
+    // this.data = ko.observable(data); 
+    // this.isReady = ko.observable(isReady);
     this.templateName = templateName;
     this.data = data; 
+    this.isReady = isReady;
  };
 
 Congo.initTemplateEngine = function() {
