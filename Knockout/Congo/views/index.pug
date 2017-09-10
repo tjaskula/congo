@@ -6,7 +6,7 @@ block content
       .span12
         ul#nav.breadcrumb(data-bind="html: navViewModel.showCrumbs")
 
-    #details(data-bind="template: { name: detailsViewModel.templateName, data: detailsViewModel }")
+    #details(data-bind="template: { name: detailsViewModel.view.templateName, data: detailsViewModel.view }")
     #editor
   
   //- ul(data-bind="template: { name: 'peopleList' }")

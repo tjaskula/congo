@@ -7,10 +7,8 @@ Congo.databases =
 
 Congo.databasesViewModel = function() {
   var
-    templateName = "db-details-template",
-    data = Congo.databases
+    view = new Congo.View("databasesViewModel", "db-details-template", Congo.databases)
   return {
-    templateName : templateName,
-    data : data
+    view : view
   }
 };
