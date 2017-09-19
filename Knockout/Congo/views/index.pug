@@ -3,7 +3,7 @@ extends layout.pug
 block content
   #app
     .row
-      .span12
+      .col-md-12
         ul#nav.breadcrumb(data-bind="html: navViewModel.showCrumbs")
 
     #details(data-bind="template: { name: detailsViewModel.view.templateName, data: detailsViewModel.view.data }")
@@ -18,23 +18,24 @@ block content
 
   script#editor-template(type = "text/backbone")
     .row
-      #ace-editor.span9
-      #ace-editor-options.span3.pull-right
+      #ace-editor.col-md-9
+      #ace-editor-options.col-md-3.pull-right
         p
           button#save-document.btn.btn-primary(style="margin-right:8px") Save 
           button#delete-document.btn.btn-danger Delete
 
   script#collection-details-template(type="text/backbone")
     .row
-      #collection-list.span8
-      #collection-options.span3
+      #collection-list.col-md-8
+      #collection-options.col-md-3
     
   script#db-details-template(type="text/html")
     .row
-      .span8
+      .col-md-8
         table.table.table-striped
-          tbody(data-bind="template: { name: view.templateName, foreach: view.data }")
-      //#database-options.span3
+          tbody(data-bind="template: { name: viewDetails.templateName, foreach: viewDetails.data }")
+      .col-md-3
+        div(data-bind="template: { name: viewOptions.templateName }")
   
   script#database-list-template(type="text/html")
     tr
@@ -47,6 +48,14 @@ block content
         button.btn.btn-default
           i.glyphicon.glyphicon-remove
           | delete
+
+  script#new-db-template(type="text/html")
+    form#addDb
+      .form-group
+        input.form-control(id="newDb", type="text")
+      button.btn.btn-default(type="submit")
+        i.glyphicon.glyphicon-plus-sign
+        | Add Db
   
   script#document-details-template(type="text/backbone")
     .row
@@ -54,13 +63,6 @@ block content
         .row
           #document-list.span8
           #document-options.span3
-      
-  script#new-db-template(type="text/backbone")
-    form#addDb
-        input(id="newDb", type="text")
-        button.btn(type="submit")
-          i.icon.icon-plus-sign
-          | Add Db
 
   script#new-collection-template(type="text/backbone")
     form#addCollection
