@@ -43,7 +43,7 @@ block content
         img(src="/img/database.png", style="height:24px")
       td
         h4
-          a(data-bind="attr: { href: '#', 'data-db': name }, text: name")
+          a(data-bind="attr: { href: '#', 'data-db': name }, text: name, click: $parent.dbSelect")
       td
         button.btn.btn-default
           i.glyphicon.glyphicon-remove

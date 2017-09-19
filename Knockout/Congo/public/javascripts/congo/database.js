@@ -22,16 +22,20 @@ Congo.databases =
 //};
 
 Congo.databaseListViewModel = function(databaseList){
-  var viewDetails = new Congo.View("database-list-template", databaseList)
-  var viewOptions = new Congo.View("new-db-template")
+  var viewDetails = new Congo.View("database-list-template", databaseList);
+      viewOptions = new Congo.View("new-db-template");
+      onDatabaseClick = function(item, event) {
+        console.log("Clicked Db : " + JSON.stringify(item));
+      }
   return {
     viewDetails : viewDetails,
-    viewOptions : viewOptions
+    viewOptions : viewOptions,
+    dbSelect : onDatabaseClick
   }
 };
 
 Congo.databasesLayoutViewModel = function() {
-  var view = new Congo.View("db-details-template", new Congo.databaseListViewModel(Congo.databases))
+  var view = new Congo.View("db-details-template", new Congo.databaseListViewModel(Congo.databases));
   return {
     view : view
   }
