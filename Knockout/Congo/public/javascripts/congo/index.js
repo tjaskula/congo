@@ -1,7 +1,8 @@
-Congo = {
-  init: function () {
+global.congo = {};
+$(function () {
+  congo.init = function () {
     
-    Congo.initTemplateEngine();
+    congo.initTemplateEngine();
 
     // var viewModel = {
     //   people: ko.observableArray([
@@ -11,31 +12,33 @@ Congo = {
     // };
 
     // the App layout
-    Congo.appViewModel = {
-      navViewModel: new Congo.breadcrumbViewModel(),
-      detailsViewModel: new Congo.databasesLayoutViewModel()
+    congo.appViewModel = {
+      navViewModel: new congo.breadcrumbViewModel(),
+      detailsViewModel: new congo.databasesLayoutViewModel()
     };
     
-    ko.applyBindings(Congo.appViewModel);
+    ko.applyBindings(congo.appViewModel);
   },
-  start: function () {
+  congo.start = function () {
 
     // initialize the app
-    Congo.init();
+    congo.init();
     
     // for routing purposes
     
   },
-  navHome: function () {
+  congo.navHome = function () {
     
   },
-  navDatabase: function (db) {
+  congo.navDatabase = function (db) {
     
   },
-  navCollection: function (collection) {
+  congo.navCollection = function (collection) {
     
   },
-  navDocument: function (id) {
+  congo.navDocument = function (id) {
     
   }
-}
+  // start congo application
+  congo.start();
+});
