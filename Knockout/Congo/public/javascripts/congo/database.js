@@ -1,9 +1,12 @@
-Congo.databases =
-  [
-    { id: 1, name: "one" },
-    { id: 2, name: "two" },
-    { id: 3, name: "three" }
-  ];
+Congo.databases = function () {
+  var dbs = ko.observableArray([]);
+  $.getJSON("mongo-api/dbs", function(data) {
+    _.each(data, function(db) {
+      dbs.push(db.name);
+    });
+  });
+  return dbs;
+};
 
 // Congo.databaseViewModel = function(db) {
 //   var view = new Congo.View("database-list-template", db)
@@ -21,7 +24,7 @@ Congo.databases =
   // }
 //};
 
-Congo.databaseListViewModel = function(databaseList){
+Congo.databaseListViewModel = function(databaseList) {
   var viewDetails = new Congo.View("database-list-template", databaseList);
       viewOptions = new Congo.View("new-db-template");
       onDatabaseClick = function(item, event) {
@@ -35,7 +38,7 @@ Congo.databaseListViewModel = function(databaseList){
 };
 
 Congo.databasesLayoutViewModel = function() {
-  var view = new Congo.View("db-details-template", new Congo.databaseListViewModel(Congo.databases));
+  var view = new Congo.View("db-details-template", new Congo.databaseListViewModel(Congo.databases()));
   return {
     view : view
   }
