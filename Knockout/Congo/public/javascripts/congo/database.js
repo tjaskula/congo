@@ -1,14 +1,8 @@
 (function (congo) {
-  congo.databases = function () {
-    var dbs = ko.observableArray([]);
-    $.getJSON("mongo-api/dbs", function(data) {
-      _.each(data, function(db) {
-        dbs.push(db.name);
-      });
-    });
-    return dbs;
+  congo.Database = function () {
+    var self = this;
+    self.name = ko.observable();
   };
-
   // congo.databaseViewModel = function(db) {
   //   var view = new congo.View("database-list-template", db)
   //   return {
@@ -39,7 +33,17 @@
   };
 
   congo.databasesLayoutViewModel = function() {
-    var view = new congo.View("db-details-template", new congo.databaseListViewModel(congo.databases()));
+    var databases = ko.observableArray([]),
+        loadDatabasesCallback = function (json) {
+          _.each(json, function(db) {
+            databases.push(new congo.Database().name(db.name));
+          });
+        },
+        loadDatabases = function () {
+          congo.ajaxService.ajaxGetJson("mongo-api/dbs", null, loadDatabasesCallback)
+        };
+    loadDatabases();
+    var view = new congo.View("db-details-template", new congo.databaseListViewModel(databases));
     return {
       view : view
     }

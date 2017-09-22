@@ -31,4 +31,36 @@
         ko.setTemplateEngine(new ko.underscoreTemplateEngine());
         /* ---- End integration of Underscore template engine with Knockout ---- */
     };
+
+    congo.ajaxService = (function () {
+        var ajaxGetJson = function (getUrl, jsonIn, callback) {
+            $.ajax({
+                url: getUrl,
+                type: "GET",
+                data: ko.toJSON(jsonIn),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (json) {
+                    callback(json);
+                }
+            });
+        },
+            ajaxPostJson = function (postUrl, jsonIn, callback) {
+                $.ajax({
+                    url: postUrl,
+                    type: "POST",
+                    data: ko.toJSON(jsonIn),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (json) {
+                        callback(json);
+                    }
+                });
+            };
+        return {
+            ajaxGetJson: ajaxGetJson,
+            ajaxPostJson: ajaxPostJson
+        };
+    })();
+
 }(congo));
