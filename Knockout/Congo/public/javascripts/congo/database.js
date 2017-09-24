@@ -21,14 +21,10 @@
 
   congo.databaseListViewModel = function(databaseList) {
     var viewDetails = new congo.View("database-list-template", databaseList),
-        viewOptions = new congo.View("new-db-template"),
-        onDatabaseClick = function(item) {
-          console.log("Clicked Db : " + ko.toJSON(item));
-        };
+        viewOptions = new congo.View("new-db-template")
     return {
       viewDetails : viewDetails,
-      viewOptions : viewOptions,
-      dbSelect : onDatabaseClick
+      viewOptions : viewOptions
     }
   };
 

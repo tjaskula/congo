@@ -12,9 +12,17 @@ $(function () {
     // };
 
     // the App layout
-    congo.appViewModel = {
-      navViewModel: new congo.breadcrumbViewModel(),
-      detailsViewModel: new congo.databasesLayoutViewModel()
+    congo.appViewModel = function () {
+      navViewModel = new congo.breadcrumbViewModel(),
+      detailsViewModel = new congo.databasesLayoutViewModel(),
+      onDatabaseClick = function(item) {
+        console.log("Clicked Db : " + ko.toJSON(item));
+      };
+      return {
+        navViewModel: navViewModel,
+        detailsViewModel: detailsViewModel,
+        dbSelect: onDatabaseClick
+      }
     };
     
     ko.applyBindings(congo.appViewModel);
